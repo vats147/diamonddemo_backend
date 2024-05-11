@@ -60,73 +60,64 @@ export const get_all_grade = async (req, res) => {
 };
 
 export const delete_grade = async(req,res)=>{
-    
+    const{grade_id} =req.body;
+    if(!grade_id)
+        {
+            res.status(400).json({error:"Grade is required"});
+        }
+    try{
+        const objectId=new mongoose.Type.ObjectId(grade_id);
+        
+        const deletegrade=await grademodel.Grade.findOneAndDelete({grade_id:objectId});
+        if(deletegrade)
+            {
+                console.log("Grade Deleted: ", deletegrade);
+                res.status(200).json({message:"Grade Deleted",data:deletegrade })
+            }
+        else
+        {
+            console.log("Grade not Found");
+            res.status(404).json({message:"Grade Not found"});
+        }
+
+
+    }
+    catch(error)
+    {
+        console.error(`Error while deleting grade ${error}`);
+        res.status(500).json({error:"Internal Server Error"});
+    }
 }
-// export const delete_color = async (req, res) => {
-//   try {
-    
-//     const { color_id } = req.body;
-//     if (!color_id) {
-//       return res.status(400).json({ error: "Color id is required" });
-//     }
+export const update_color=async(req,res)=>{
+    const {grade_id,grade_name}=req.body;
+    if(!grade_id)
+    {
+        res.status(400).json({error:"Grade Id is not Provided"});
+    }
+    if(!grade_name)
+    {
+        res.status(400).json({error:"Grade Name is not provided"});
+    }
+    try{
+        const objectId= new mongoose.Types.ObjectId(grade_id);
 
-//     const objectId = new mongoose.Types.ObjectId(color_id);
-//     console.log(objectId)
+        const updategrade= await grademodel.Grade.findByIdAndUpdate({grade_id:objectId},{grade_name:grade_name},{new:true});
 
-//     const deletecolor = await colormodel.Color.findOneAndDelete({color_id:objectId});
-//     console.log(deletecolor);
-//     if(deletecolor)
-//         {
-//             console.log("color deleted:",deletecolor);
-//             res.status(200).json({message:"color deleted",data:deletecolor});
+        if(updategrade)
+        {
+            console.log("Grade update succesfully");
+            res.status(200).json({message:"Grade Updated",data:updategrade});
 
-//         }
-//     else
-//     {
-//         console.log("Color not found ");
-//         res.status(404).json({message:"Color not found"});
-
-//     }
-//   } catch (err) {
-//     console.error("Error deleting color : ", err);
-//     res.status(500).json({ error: "Internal Server Error" });
-//   }
-// };
-
-
-// // update_color
-// export const update_color = async (req, res) => {
-//     try {
-//       const { color_id, color_name } = req.body;
-//       if (!color_id) {
-//         return res.status(400).json({ error: "Color id is required" });
-//       }
-//       if (!color_name) {
-//         return res.status(400).json({ error: "Color name is required" });
-//       }
-//       console.log(color_id);
-//       // Convert color_id to ObjectId
-//       const objectId = new mongoose.Types.ObjectId(color_id);
-//       console.log(objectId);
-//         console.log(objectId);
-
-//       const updatecolor = await colormodel.Color.findOneAndUpdate(
-//         { color_id: objectId }, // Filter criteria
-//         { color_name: color_name }, // Update data
-//         { new: true } // Return the updated document
-//       );
-  
-//       console.log(updatecolor);
-//       if (updatecolor) {
-//         console.log("color updated:", updatecolor);
-//         res.status(200).json({ message: "color updated", data: updatecolor });
-//       } else {
-//         console.log("Color not found ");
-//         res.status(404).json({ message: "Color not found" });
-//       }
-//     } catch (err) {
-//       console.error("Error updating color : ", err);
-//       res.status(500).json({ error: "Internal Server Error" });
-//     }
-//   };
-  
+        }
+        else
+        {
+            console.log("Grade not found");
+            res.status(400).json({message:"Grade not found "});
+        }
+    }
+    catch(error)
+    {
+        console.log("Error while updating grade",error);
+        res.status(500).json({error:"Internal Server Error"});
+    }
+}
