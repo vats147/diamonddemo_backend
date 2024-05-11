@@ -5,6 +5,7 @@ import multer from 'multer';
 import bodyParser from 'body-parser';
 import { color_router as colorrouter} from './routes/color.js';
 import {grade_router as graderouter} from './routes/grade.js';
+import { size_router as sizerouter } from './routes/size.js';
 
 // load env file 
 
@@ -33,6 +34,8 @@ server.use(multer().none());
 
 server.use('/',colorrouter);
 server.use('/',graderouter);
+server.use('/',sizerouter);
+
 
 server.listen(port,()=>{
     console.log(`server is running on ${port}`)
