@@ -88,7 +88,7 @@ export const delete_grade = async(req,res)=>{
         res.status(500).json({error:"Internal Server Error"});
     }
 }
-export const update_color=async(req,res)=>{
+export const update_grade=async(req,res)=>{
     const {grade_id,grade_name}=req.body;
     if(!grade_id)
     {
