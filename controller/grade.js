@@ -63,7 +63,7 @@ export const delete_grade = async(req,res)=>{
     const{grade_id} =req.body;
     if(!grade_id)
         {
-            res.status(400).json({error:"Grade is required"});
+            res.status(400).json({error:"Grade id is required"});
         }
     try{
         const objectId=new mongoose.Type.ObjectId(grade_id);
