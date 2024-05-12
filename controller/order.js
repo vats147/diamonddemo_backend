@@ -79,9 +79,16 @@ export const get_one_order=async (req,res)=>{
 
 // update
 // insert
+
 export const addorder= async(req,res)=>{
 
-}
+    try {
+        const order = await ordermodel.Order.create(req.body); // Create a new order with data from request body
+        res.status(201).json({ success: true, data: order }); // Send success response with created order data
+    } catch (error) {
+        res.status(400).json({ success: false, error: error.message }); // Send error response if unable to create order
+    }
+};
 
 export const editorder=async(req,res)=>{
     

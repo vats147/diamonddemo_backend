@@ -3,7 +3,7 @@ import  mongoose  from "mongoose";
 const {Schema} = mongoose;
 
 const order_schema =new Schema({
-    orderId:{type:Schema.Types.ObjectId, required:true},
+    orderId:{type:Schema.Types.ObjectId,default: new mongoose.Types.ObjectId(), required:true},
     partyName:{type:String},
     brokerName:{type:String,required:true},
     packageWeight:{type:Number,required:true},
