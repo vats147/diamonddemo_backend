@@ -80,7 +80,7 @@ export const delete_size = async (req, res) => {
 }
 
 
-export const update_grade = async (req, res) => {
+export const update_size = async (req, res) => {
     const { grade_id, grade_name } = req.body;
     if (!grade_id) {
         return res.status(400).json({ error: "Grade Id is not provided" });

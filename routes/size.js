@@ -9,4 +9,4 @@ size_router.get('/getallsizes', size.get_all_size)
     .put('/updatesize', size.update_size)
     .delete('/deletesize', size.delete_size);
 
-export { size_router };
+export { size_router as size_router};

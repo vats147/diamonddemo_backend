@@ -6,7 +6,8 @@ import bodyParser from 'body-parser';
 import { color_router as colorrouter} from './routes/color.js';
 import {grade_router as graderouter} from './routes/grade.js';
 import { size_router as sizerouter } from './routes/size.js';
-import {shape_router} from './routes/shape.js';
+
+import { shape_route } from './routes/shape.js';
 import { order_router } from './routes/order.js';
 // load env file 
 
@@ -36,7 +37,7 @@ server.use(multer().none());
 server.use('/',colorrouter);
 server.use('/',graderouter);
 server.use('/',sizerouter);
-server.use('/',shape_router);
+server.use('/',shape_route);
 server.use('/',order_router);
 
 

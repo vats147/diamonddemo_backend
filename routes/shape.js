@@ -3,7 +3,7 @@ import express from 'express';
 
 const server=express();
 
-const shape_route=server.router();
+const shape_route=express.Router();
 
 shape_route.get('/getallshape',shape.get_all_shape)
 .post('/addshape',shape.add_shape)
