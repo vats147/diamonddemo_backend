@@ -33,12 +33,14 @@ server.use(cors());
 // server.use(bodyParser.urlencoded({ extended: true }));
 server.use(multer().none());
 
-
+// manage by admin only
 server.use('/',colorrouter);
 server.use('/',graderouter);
 server.use('/',sizerouter);
 server.use('/',shape_route);
-server.use('/',order_router);
+
+// manage by user
+server.use('/',order_router); // addorder,editorder, user can add order
 
 
 server.listen(port,()=>{
