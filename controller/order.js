@@ -5,7 +5,7 @@ export const delete_order= async(req,res)=>{
     const {orderId} = req.body;
     if(!orderId)
     {
-        return res.status(400).json({error:"OrderID is required"});
+        return res.status(400).json({message:"OrderID is required"});
     }
     try{
         const objectId= new mongoose.Types.objectId(orderId);
@@ -25,7 +25,7 @@ export const delete_order= async(req,res)=>{
     catch(error)
     {
         console.log("Error while deleting order",error);
-        res.status(500).json({error:"Internal Server Error"});
+        res.status(500).json({message:"Internal Server Error"});
     }
 }
 
@@ -42,7 +42,7 @@ export const get_all_order= async(req,res)=>{
     catch(error)
     {
         console.log("Error while fetching all order");
-        res.status(500).json({error:"Internal Server Error"});
+        res.status(500).json({message:"Internal Server Error"});
     }
 }
 
@@ -61,7 +61,7 @@ export const get_one_order=async (req,res)=>{
         if(getoneorder.length===0)
         {
             
-            res.status(404).json({error:"No record found"});
+            res.status(404).json({message:"No record found"});
         }
         else
         {
@@ -72,7 +72,7 @@ export const get_one_order=async (req,res)=>{
     catch(error)
     {
         console.log("Error while fetching one order ",error);
-        res.send(500).json({error:"Internal Server Error"});
+        res.send(500).json({message:"Internal Server Error"});
     }
 
 }
@@ -86,7 +86,7 @@ export const addorder= async(req,res)=>{
         const order = await ordermodel.Order.create(req.body); // Create a new order with data from request body
         res.status(201).json({ success: true, data: order }); // Send success response with created order data
     } catch (error) {
-        res.status(400).json({ success: false, error: error.message }); // Send error response if unable to create order
+        res.status(400).json({ success: false, message: error.message }); // Send error response if unable to create order
     }
 };
 
