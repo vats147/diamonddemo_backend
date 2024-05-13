@@ -18,7 +18,7 @@ export const add_size = async (req,res)=>{
             }
         else
         {
-            const objectId =new mongoose.Types.objectId();
+            const objectId =new  mongoose.Types.ObjectId();
             const newSize= new sizemodel.Size({
                 size_id:objectId,
                 size_name:size_name,
@@ -35,7 +35,7 @@ export const add_size = async (req,res)=>{
     }
     catch(error)
     {
-        console.error("Error while adding Shape", err);
+        console.error("Error while adding Shape", error);
         res.status(500).json({message:"Internal Server Error"});
     }
 }

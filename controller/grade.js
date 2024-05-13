@@ -15,7 +15,7 @@ export const add_grade= async(req,res)=>{
             if(gradedata.length>0)
             {
                 console.log("Grade already exists: ");
-                return res.status(400).json({message:"Color Already Exists"});
+                return res.status(400).json({message:"Grade Already Exists"});
 
             }
             else
@@ -41,7 +41,7 @@ export const add_grade= async(req,res)=>{
         res.status(500).json({message:"Internal Server Error"});
     }
 }
-// getallcolor
+// getallGrade
 export const get_all_grade = async (req, res) => {
   try{
     const allGrade= await grademodel.Grade.find();
