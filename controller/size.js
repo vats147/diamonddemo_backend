@@ -52,7 +52,7 @@ export const get_all_size= async(req,res)=>{
     }
     catch(error)
     {
-        console.error("Error while adding Grade", err);
+        console.error("Error while adding Shape", error);
         res.status(500).json({message:"Internal Server Error"});
     
     }
@@ -81,25 +81,46 @@ export const delete_size = async (req, res) => {
 
 
 export const update_size = async (req, res) => {
-    const { grade_id, grade_name } = req.body;
-    if (!grade_id) {
-        return res.status(400).json({ message: "Grade Id is not provided" });
+    const { size_id, size_name } = req.body;
+    if (!size_id) {
+        return res.status(400).json({ message: "Size Id is not provided" });
     }
-    if (!grade_name) {
-        return res.status(400).json({ message: "Grade Name is not provided" });
+    if (!size_name) {
+        return res.status(400).json({ message: "Size Name is not provided" });
     }
     try {
-        const objectId = new mongoose.Types.ObjectId(grade_id);
-        const updateGrade = await grademodel.Grade.findByIdAndUpdate(grade_id, { grade_name }, { new: true });
-        if (updateGrade) {
-            console.log("Grade updated successfully");
-            res.status(200).json({ message: "Grade Updated", data: updateGrade });
+        const objectId = new mongoose.Types.ObjectId(size_id);
+        console.log(objectId)
+        const updateSize = await sizemodel.Size.findOneAndUpdate({
+            size_id:objectId
+        },{size_name:size_name}, { new: true });
+        if (updateSize) {
+            console.log("Size updated successfully");
+            res.status(200).json({ message: "Size Updated", data: updateSize });
         } else {
-            console.log("Grade not found");
-            res.status(404).json({ message: "Grade not found" });
+            console.log("Size not found");
+            res.status(404).json({ message: "Size not found" });
         }
     } catch (error) {
-        console.error("Error while updating grade", error);
+        console.error("Error while updating Size", error);
         res.status(500).json({ message: "Internal Server Error" });
     }
 }
+export const get_size_by_id = async (req, res) => {
+    const { size_id } =  req.body;
+    console.log("Get Size by ID",size_id);
+    if (!size_id) {
+        return res.status(400).json({ message: "Invalid Size ID" });
+    }
+    try {
+        const objectId = new mongoose.Types.ObjectId(size_id);
+        const size = await sizemodel.Size.find({size_id: objectId});
+        if (!size) {
+            return res.status(404).json({ message: "Size not found" });
+        }
+        res.status(200).json({ message: "Size Retrieved Successfully", data: size });
+    } catch (error) {
+        console.error("Error while fetching size by ID", error);
+        res.status(500).json({ message: "Internal Server Error" });
+    }
+};
