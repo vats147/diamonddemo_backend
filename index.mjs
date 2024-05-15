@@ -6,9 +6,12 @@ import bodyParser from 'body-parser';
 import { color_router as colorrouter} from './routes/color.js';
 import {grade_router as graderouter} from './routes/grade.js';
 import { size_router as sizerouter } from './routes/size.js';
-
+import {user_router as userrouter} from './routes/user.js';
 import { shape_route } from './routes/shape.js';
 import { order_router } from './routes/order.js';
+import {login_router as loginrouter} from './routes/login.js'
+import {otp_router as otprouter} from './routes/sendotp.js'
+import {passforgot_router as passforgotroute} from './routes/forgot_password.js'
 // load env file 
 
 
@@ -38,6 +41,10 @@ server.use('/',colorrouter);
 server.use('/',graderouter);
 server.use('/',sizerouter);
 server.use('/',shape_route);
+server.use('/',userrouter);
+server.use('/',loginrouter);
+server.use('/',otprouter);
+server.use('/',passforgotroute);
 
 // manage by user
 server.use('/',order_router); // addorder,editorder, user can add order
