@@ -6,14 +6,14 @@ export const add_color = async (req, res) => {
   console.log("add color request received");
   const { color_name } = req.body;
   if (!color_name) {
-    return res.status(400).json({ error: "Color name is required" });
+    return res.status(400).json({ message: "Color name is required" });
   }
 
   try {
     const colordata = await colormodel.Color.find({ color_name: color_name });
     if (colordata.length > 0) {
       console.log("Color Already Exists");
-      return res.status(400).json({ error: "Color Already Exists" });
+      return res.status(400).json({ message: "Color Already Exists" });
     } else {
       // Generate a new ObjectId
       const color_id = new mongoose.Types.ObjectId();
@@ -32,7 +32,7 @@ export const add_color = async (req, res) => {
     }
   } catch (err) {
     console.error("Error adding color: ", err);
-    res.status(500).json({ error: "Internal Server Error" });
+    res.status(500).json({ message: "Internal Server Error" });
   }
 };
 
@@ -50,7 +50,7 @@ export const get_all_color = async (req, res) => {
       .json({ message: "Colors retrived succesfully", data: allColors });
   } catch (err) {
     console.error("Error Fetching color : ", err);
-    res.status(500).json({ error: "Internal Server Error" });
+    res.status(500).json({ message: "Internal Server Error" });
   }
 };
 
@@ -62,7 +62,7 @@ export const delete_color = async (req, res) => {
     
     const { color_id } = req.body;
     if (!color_id) {
-      return res.status(400).json({ error: "Color id is required" });
+      return res.status(400).json({ message: "Color id is required" });
     }
 
     const objectId = new mongoose.Types.ObjectId(color_id);
@@ -84,7 +84,7 @@ export const delete_color = async (req, res) => {
     }
   } catch (err) {
     console.error("Error deleting color : ", err);
-    res.status(500).json({ error: "Internal Server Error" });
+    res.status(500).json({ message: "Internal Server Error" });
   }
 };
 
@@ -94,10 +94,10 @@ export const update_color = async (req, res) => {
     try {
       const { color_id, color_name } = req.body;
       if (!color_id) {
-        return res.status(400).json({ error: "Color id is required" });
+        return res.status(400).json({ message: "Color id is required" });
       }
       if (!color_name) {
-        return res.status(400).json({ error: "Color name is required" });
+        return res.status(400).json({ message: "Color name is required" });
       }
       console.log(color_id);
       // Convert color_id to ObjectId
@@ -121,7 +121,7 @@ export const update_color = async (req, res) => {
       }
     } catch (err) {
       console.error("Error updating color : ", err);
-      res.status(500).json({ error: "Internal Server Error" });
+      res.status(500).json({ message: "Internal Server Error" });
     }
   };
   

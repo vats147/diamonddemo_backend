@@ -8,14 +8,14 @@ export const add_grade= async(req,res)=>{
     const {grade_name}=req.body;
     if(!grade_name)
     {
-        return res.status(400).json({error:"Grade Name is required"})
+        return res.status(400).json({message:"Grade Name is required"})
     }
     try{
             const gradedata=await grademodel.Grade.find({grade_name:grade_name});
             if(gradedata.length>0)
             {
                 console.log("Grade already exists: ");
-                return res.status(400).json({error:"Color Already Exists"});
+                return res.status(400).json({message:"Grade Already Exists"});
 
             }
             else
@@ -38,10 +38,10 @@ export const add_grade= async(req,res)=>{
     }
     catch(error){
         console.error("Error while adding Grade", err);
-        res.status(500).json({error:"Internal Server Error"});
+        res.status(500).json({message:"Internal Server Error"});
     }
 }
-// getallcolor
+// getallGrade
 export const get_all_grade = async (req, res) => {
   try{
     const allGrade= await grademodel.Grade.find();
@@ -55,7 +55,7 @@ export const get_all_grade = async (req, res) => {
   catch(error)
   {
     console.error("Error Fetching all grade : ",error);
-    res.status(500).json({error:"Internal Server Error"});
+    res.status(500).json({message:"Internal Server Error"});
   }
 };
 
@@ -63,7 +63,7 @@ export const delete_grade = async(req,res)=>{
     const{grade_id} =req.body;
     if(!grade_id)
         {
-            res.status(400).json({error:"Grade id is required"});
+            res.status(400).json({message:"Grade id is required"});
         }
     try{
         const objectId=new mongoose.Type.ObjectId(grade_id);
@@ -85,18 +85,18 @@ export const delete_grade = async(req,res)=>{
     catch(error)
     {
         console.error(`Error while deleting grade ${error}`);
-        res.status(500).json({error:"Internal Server Error"});
+        res.status(500).json({message:"Internal Server Error"});
     }
 }
 export const update_grade=async(req,res)=>{
     const {grade_id,grade_name}=req.body;
     if(!grade_id)
     {
-        res.status(400).json({error:"Grade Id is not Provided"});
+        res.status(400).json({message:"Grade Id is not Provided"});
     }
     if(!grade_name)
     {
-        res.status(400).json({error:"Grade Name is not provided"});
+        res.status(400).json({message:"Grade Name is not provided"});
     }
     try{
         const objectId= new mongoose.Types.ObjectId(grade_id);
@@ -118,6 +118,6 @@ export const update_grade=async(req,res)=>{
     catch(error)
     {
         console.log("Error while updating grade",error);
-        res.status(500).json({error:"Internal Server Error"});
+        res.status(500).json({message:"Internal Server Error"});
     }
 }

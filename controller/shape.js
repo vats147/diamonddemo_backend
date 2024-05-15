@@ -4,7 +4,7 @@ import mongoose from "mongoose";
 export const add_shape = async (req, res) => {
   const { shape_name } = req.body;
   if (!shape_name) {
-    return res.status(400).json({ error: "Shape name is required" });
+    return res.status(400).json({ message: "Shape name is required" });
   }
 
   try {
@@ -14,7 +14,7 @@ export const add_shape = async (req, res) => {
 
     if (shapedata.length > 0) {
       console.log("Shape already exists");
-      return res.status(400).json({ error: "Shape already exists" });
+      return res.status(400).json({ message: "Shape already exists" });
     }
 
     const objectId = new mongoose.Types.ObjectId();
@@ -32,7 +32,7 @@ export const add_shape = async (req, res) => {
     }
   } catch (error) {
     console.log(`Error while adding shpe name ${error}`);
-    res.status(500).json({ error: "Internal Server Error" });
+    res.status(500).json({ message: "Internal Server Error" });
   }
 };
 
@@ -47,14 +47,14 @@ export const get_all_shape = async (req, res) => {
       .json({ message: "Shape retrived Succesfully", data: allshape });
   } catch (error) {
     console.log("Error while retriving all shape ", error);
-    res.status(500).json({ error: "Internal Server Error" });
+    res.status(500).json({ message: "Internal Server Error" });
   }
 };
 
 export const delete_shape = async (req, res) => {
   const { shape_id } = req.body;
   if (!shape_id) {
-    res.status(400).json({ error: "Shape id required" });
+    res.status(400).json({ message: "Shape id required" });
   }
   try {
     const objectId = mongoose.Types.ObjectId(shape_id);
@@ -74,7 +74,7 @@ export const delete_shape = async (req, res) => {
         }
   } catch (error) {
     console.log("Error while deleting shape ", error);
-    res.status(500).json({ error: "Internal Server Error" });
+    res.status(500).json({ message: "Internal Server Error" });
   }
 };
 
@@ -84,12 +84,12 @@ export const update_shape=async(req,res)=>{
 
     if(!shape_id)
         {
-            res.status(400).json({error:"Shape ID is not provided"});
+            res.status(400).json({message:"Shape ID is not provided"});
 
         }
     if(!shape_name)
         {
-            res.status(400).json({error:"Shape Name is not provided"});
+            res.status(400).json({message:"Shape Name is not provided"});
         }
     try{
         const objectId=new mongoose.Types.ObjectId(shape_id);
@@ -112,6 +112,6 @@ export const update_shape=async(req,res)=>{
     catch(error)
     {
         console.log("Error While updating shape",error);
-        res.status(500).json({error:"Internal Server Error"});
+        res.status(500).json({message:"Internal Server Error"});
     }
 }
