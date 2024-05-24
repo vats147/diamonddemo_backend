@@ -31,7 +31,7 @@ export const delete_order= async(req,res)=>{
 
 export const get_all_order= async(req,res)=>{
     try{
-        const allorder=await ordermodel.Order.find();
+        const allorder=await ordermodel.Order.find().sort({createdDateTime:-1});
         if(allorder.length===0)
             {
                 return res.status(404).json({message:"No Order Found"});
@@ -47,7 +47,8 @@ export const get_all_order= async(req,res)=>{
 }
 
 export const get_one_order=async (req,res)=>{
-    const {orderId} = req.body;
+    console.log("inside get one order");
+    const {orderId} = req.query;
     if(!orderId)
         {
             return res.status(404).json({message:"Order Id is not Provided"});
