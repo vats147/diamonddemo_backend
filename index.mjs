@@ -12,6 +12,7 @@ import { order_router } from './routes/order.js';
 import {login_router as loginrouter} from './routes/login.js'
 import {otp_router as otprouter} from './routes/sendotp.js'
 import {passforgot_router as passforgotroute} from './routes/forgot_password.js'
+import {hallo_router as hallorouter} from './routes/hello.js'
 // load env file 
 
 
@@ -45,6 +46,7 @@ server.use('/',userrouter);
 server.use('/',loginrouter);
 server.use('/',otprouter);
 server.use('/',passforgotroute);
+server.use('/',hallorouter);
 
 // manage by user
 server.use('/',order_router); // addorder,editorder, user can add order

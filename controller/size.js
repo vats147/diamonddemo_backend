@@ -30,7 +30,6 @@ export const add_size = async (req,res)=>{
                 console.log("Size saved succesfully");
                 res.status(200).json({message:"Size Added Successfully",data:saveSize})
             }
-           
         }
     }
     catch(error)
