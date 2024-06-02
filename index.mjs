@@ -23,10 +23,21 @@ const port=8080;
 main().catch((err)=>console.log(err))
 
 async function main(){
-    await mongoose.connect("mongodb://127.0.0.1:27017/Polish_Estimate");
-    console.log("database is connected");
+    try {
+        // Check if already connected
+        if (mongoose.connection.readyState === 0) {
+            await mongoose.connect("mongodb+srv://yashdesai281:yashdesai99748@narayanmunidev.atasrxl.mongodb.net/?retryWrites=true&w=majority&appName=narayanmunideve", {
+                useNewUrlParser: true,
+                useUnifiedTopology: true
+            });
+            console.log("Database is connected");
+        }
+    } catch (err) {
+        console.error(err);
+    }
 }
 
+ 
 // intialize the server
 const server=express();
 

@@ -39,7 +39,7 @@ export const user_registrastion = async (req, res) => {
         user.user_Address = req.body.Address;
         user.password = hashedPassword
         user.role = "emp"
-        user.user_status = "A00"
+        user.user_status = "A00" 
         user.save();
 
 
