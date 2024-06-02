@@ -26,7 +26,7 @@ async function main(){
     try {
         // Check if already connected
         if (mongoose.connection.readyState === 0) {
-            await mongoose.connect("mongodb+srv://yashdesai281:yashdesai99748@narayanmunidev.atasrxl.mongodb.net/?retryWrites=true&w=majority&appName=narayanmunideve", {
+            await mongoose.connect("mongodb+srv://yashdesai281:yashdesai99748@narayanmunidev.atasrxl.mongodb.net/client_try?retryWrites=true&w=majority&appName=narayanmunideve", {
                 useNewUrlParser: true,
                 useUnifiedTopology: true
             });
